@@ -8,16 +8,20 @@ namespace ASR
 {
     internal class ReplaceWheels : IService
     {
-        public string DoIt(int state)
+        public Payment paymentWheels { get; set; }
+        public ReplaceWheels(Payment payment)
         {
+            paymentWheels = payment;
+        }
+        public string DoIt(int state)
+        {            
             Console.WriteLine("хотите заменить шины и диски?");
             int choice = int.Parse(Console.ReadLine());
             switch (choice)
             {
                 case 1:
-                    string tool = "wheel";
-                    Payment payment = new Payment();
-                    payment.PayReplace(tool);
+                    string tool = "wheel";                    
+                    paymentWheels.PayChoice(tool);
                     break;
                 case 0:
                     Console.WriteLine("noooooo");

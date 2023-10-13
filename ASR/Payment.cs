@@ -12,14 +12,23 @@ namespace ASR
         private int replaceWheels = 300;
         private int replaceOil = 200;
         private int input;
-        public void PayReplace(string tool)
+        public void PayChoice(string tool)
         {
             int toolPrice;
             if (tool == "wheel")
             {
                 toolPrice = replaceWheels;
+                PayReplace(toolPrice,tool);
             }
-            else { toolPrice = replaceOil; }
+            else
+            {
+                toolPrice = replaceOil;
+                PayReplace(toolPrice, tool);
+            }
+        }       
+
+        public void PayReplace(int toolPrice, string tool)
+        {
             Console.WriteLine("it cost {0},input money", toolPrice);
             input = int.Parse(Console.ReadLine());
             int priceDifference = toolPrice - input;
@@ -39,6 +48,7 @@ namespace ASR
             }
             else { Console.WriteLine("{0} replaced", tool); }
         }
+
 
 
     }
