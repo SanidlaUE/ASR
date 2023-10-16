@@ -8,6 +8,9 @@ namespace ASR
 {
     internal class AutoRepairShop
     {
+        Payment payment = new Payment();
+        
+
         private IService oilCheckService;
         public  IService OilCheckService
         { get { return oilCheckService; } }
@@ -24,8 +27,10 @@ namespace ASR
         public void Start()
         {
             oilCheckService = new OilCheckService();
-            oilReplaceService = new ReplaceOilService();
-            wheelsReplaceService = new ReplaceWheels();
+            oilReplaceService = new ReplaceOilService(payment);
+            wheelsReplaceService = new ReplaceWheels(payment);            
         }
+        
+        
     }
 }

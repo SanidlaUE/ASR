@@ -8,16 +8,21 @@ namespace ASR
 {
     internal class ReplaceOilService : IService
     {
-        public string DoIt(int state)
+        public Payment paymentOil {  get; set; }
+        public ReplaceOilService(Payment payment)
         {
+            paymentOil = payment;
+        }
+                
+        public string DoIt(int state)
+        {           
             Console.WriteLine("хотите заменить масло?");            
             int choice = int.Parse(Console.ReadLine());
             switch (choice)
             {
                 case 1:
-                    string tool = "oil";
-                    Payment payment = new Payment();
-                    payment.PayReplace(tool);
+                    string tool = "oil";                       
+                    paymentOil.PayChoice(tool);
                     break;
                 case 0:
                     Console.WriteLine("noooooo");

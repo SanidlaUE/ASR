@@ -12,14 +12,24 @@ namespace ASR
         private int replaceWheels = 300;
         private int replaceOil = 200;
         private int input;
-        public void PayReplace(string tool)
+        public void PayChoice(string tool)
         {
             int toolPrice;
-            if (tool == "wheel")
+            switch (tool)
             {
-                toolPrice = replaceWheels;
+                case "wheel":
+                    toolPrice = replaceWheels;
+                    PayReplace(toolPrice, tool);
+                    break;
+                case "oil":
+                    toolPrice = replaceOil;
+                    PayReplace(toolPrice, tool);
+                    break;
             }
-            else { toolPrice = replaceOil; }
+        }
+
+        public void PayReplace(int toolPrice, string tool)
+        {
             Console.WriteLine("it cost {0},input money", toolPrice);
             input = int.Parse(Console.ReadLine());
             int priceDifference = toolPrice - input;
@@ -34,11 +44,16 @@ namespace ASR
                     Console.WriteLine("not enough {0},input more money pls", priceDifference);
                     priceDifference = int.Parse(Console.ReadLine());
                     input += priceDifference;
-                } while (input != toolPrice);
+                } while (input < toolPrice);
+                if (input > toolPrice)
+                {
+                    Console.WriteLine("ur handing over money {0}", input - toolPrice);
+                }
                 Console.WriteLine("{0} replaced", tool);
             }
             else { Console.WriteLine("{0} replaced", tool); }
         }
+
 
 
     }
