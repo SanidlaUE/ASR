@@ -15,17 +15,18 @@ namespace ASR
         public void PayChoice(string tool)
         {
             int toolPrice;
-            if (tool == "wheel")
+            switch (tool)
             {
-                toolPrice = replaceWheels;
-                PayReplace(toolPrice,tool);
+                case "wheel":
+                    toolPrice = replaceWheels;
+                    PayReplace(toolPrice, tool);
+                    break;
+                case "oil":
+                    toolPrice = replaceOil;
+                    PayReplace(toolPrice, tool);
+                    break;
             }
-            else
-            {
-                toolPrice = replaceOil;
-                PayReplace(toolPrice, tool);
-            }
-        }       
+        }
 
         public void PayReplace(int toolPrice, string tool)
         {
@@ -43,7 +44,11 @@ namespace ASR
                     Console.WriteLine("not enough {0},input more money pls", priceDifference);
                     priceDifference = int.Parse(Console.ReadLine());
                     input += priceDifference;
-                } while (input != toolPrice);
+                } while (input < toolPrice);
+                if (input > toolPrice)
+                {
+                    Console.WriteLine("ur handing over money {0}", input - toolPrice);
+                }
                 Console.WriteLine("{0} replaced", tool);
             }
             else { Console.WriteLine("{0} replaced", tool); }
